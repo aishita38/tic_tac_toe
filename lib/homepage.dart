@@ -275,10 +275,13 @@ class _HomePageState extends State<HomePage> {
       if (a != '' && a == b && b == c) {
         win = true;
         String winner = (a == '0') ? 'Player 1' : 'Player 2';
+
         if (a == "0") {
           oh_score++;
         } else {
           x_score++;
+
+          print(ohTurn);
         }
         _showDialog(winner);
         return;
@@ -291,7 +294,21 @@ class _HomePageState extends State<HomePage> {
       displayExOh = ["", "", "", "", "", "", "", "", ""];
       filledBoxes = 0;
       win = false;
+      ohTurn = _isWinner("0");
     });
+
+    try {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        print("Post-frame callback executing");
+        if (!ohTurn && isBotMode) {
+          print("bot is first player");
+          _botMove();
+          ohTurn = !ohTurn;
+        }
+      });
+    } catch (e) {
+      print("Error in post-frame callback: $e");
+    }
   }
 
   void _showDialog(String winner) {
