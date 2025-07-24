@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'homepage.dart';
 import 'package:flutter/services.dart';
 
-void main() {
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MyApp());
 }
 
@@ -95,37 +95,35 @@ class _IntroScreenState extends State<IntroScreen>
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return Expanded(
-                        child: AlertDialog(
-                          title: Text('Select mode'),
+                      return AlertDialog(
+                        title: Text('Select mode'),
 
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        HomePage(isBotMode: true),
-                                  ),
-                                );
-                              },
-                              child: Text('PLAY VS BOT'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        HomePage(isBotMode: false),
-                                  ),
-                                );
-                              },
-                              child: Text('MULTIPLAYER'),
-                            ),
-                          ],
-                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      HomePage(isBotMode: true),
+                                ),
+                              );
+                            },
+                            child: Text('PLAY VS BOT'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      HomePage(isBotMode: false),
+                                ),
+                              );
+                            },
+                            child: Text('MULTIPLAYER'),
+                          ),
+                        ],
                       );
                     },
                   );
