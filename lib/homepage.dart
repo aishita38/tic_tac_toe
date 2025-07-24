@@ -205,9 +205,9 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         displayExOh[move] = 'X';
       });
+      filledBoxes++;
       _checkWinner();
       if (!win) _checkDraw();
-      filledBoxes++;
     }
   }
 
