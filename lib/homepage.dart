@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
-  
   final bool isBotMode;
   const HomePage({super.key, required this.isBotMode});
 
@@ -195,9 +194,9 @@ class _HomePageState extends State<HomePage> {
           bestScore = score;
           move = i;
         }
-        if (bestScore == 1) {
-          break;
-        }
+      }
+      if (bestScore == 1) {
+        break;
       }
     }
 
@@ -206,6 +205,9 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         displayExOh[move] = 'X';
       });
+      _checkWinner();
+      if (!win) _checkDraw();
+      filledBoxes++;
     }
   }
 
@@ -221,8 +223,7 @@ class _HomePageState extends State<HomePage> {
 
         ohTurn = !ohTurn;
         _checkWinner();
-        if(!win)
-        _checkDraw();
+        if (!win) _checkDraw();
         if (isBotMode) {
           _botMove();
           ohTurn = !ohTurn;
@@ -289,6 +290,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       displayExOh = ["", "", "", "", "", "", "", "", ""];
       filledBoxes = 0;
+      win = false;
     });
   }
 
